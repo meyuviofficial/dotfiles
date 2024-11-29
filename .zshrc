@@ -138,3 +138,4 @@ fi
 
 alias config='/usr/bin/git --git-dir=/Users/yuvaraj.selvarajan/.cfg/ --work-tree=/Users/yuvaraj.selvarajan'
 alias config='/usr/bin/git --git-dir=/Users/yuvaraj.selvarajan/.cfg/ --work-tree=/Users/yuvaraj.selvarajan'
+BAT_THEME="Catppuccin Mocha"
