@@ -4,6 +4,13 @@ This repo contains the configuration files for all the command line tools that I
 
 ## tools :hammer_and_wrench:
 
+This is how my terminal looks :point_down:
+
+![Terminal Setup](img/terminal.png)
+
+This is how my neo-vim setup looks like
+
+![Neovim setup](img/neovim.png)
 ### Catpuccin theme :relaxed:
 
 Catpuccin theme has been configured in most of the tools.
