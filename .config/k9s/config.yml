@@ -1,0 +1,339 @@
+k9s:
+  refreshRate: 2
+  maxConnRetry: 5
+  enableMouse: false
+  headless: false
+  logoless: false
+  crumbsless: false
+  readOnly: false
+  noExitOnCtrlC: false
+  noIcons: false
+  skipLatestRevCheck: false
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: 300
+    fullScreenLogs: false
+    textWrap: false
+    showTime: false
+  currentContext: westeurope-prod
+  currentCluster: westeurope-prod
+  clusters:
+    arn:aws:eks:eu-west-1:013166048104:cluster/cpe__eu-west-1__devinfra__1:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - all
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    arn:aws:eks:eu-west-1:765139991506:cluster/euwest1devinfra-sharedservices:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - nginx-ingress
+        - all
+        - default
+      view:
+        active: ingress
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    arn:aws:eks:us-east-1:013166048104:cluster/cpe__us-east-1__devinfra__1:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - ingress-nginx
+        - platform
+        - all
+        - default
+      view:
+        active: ctx
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    arn:aws:eks:us-east-1:679923227529:cluster/useast1ops-sharedservices-0:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - all
+        - default
+      view:
+        active: ingress
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    arn:aws:eks:us-east-1:707244009094:cluster/useast1opsdev-sharedservices-0:
+      namespace:
+        active: kasten-io-mc
+        lockFavorites: false
+        favorites:
+        - kasten-io-mc
+        - cd-jenkins-babbage
+        - all
+        - kasten-io
+        - ci-jenkins
+        - cd-jenkins
+        - default
+      view:
+        active: cluster
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    arn:aws:eks:us-east-1:765139991506:cluster/useast1devinfra-sharedservices-0:
+      namespace:
+        active: kasten-io-mc
+        lockFavorites: false
+        favorites:
+        - all
+        - default
+      view:
+        active: clusters.dist.kio.kasten.io
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    tst-aks:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - all
+        - default
+      view:
+        active: apiservice
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-dev:
+      namespace:
+        active: cloudhealth
+        lockFavorites: false
+        favorites:
+        - apple
+        - cloudhealth
+        - all
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-devinfra:
+      namespace:
+        active: kasten-io
+        lockFavorites: false
+        favorites:
+        - babbage
+        - cloudhealth
+        - platform
+        - kasten-io
+        - eck-babbage
+        - eck
+        - kubecost
+        - all
+      view:
+        active: ctx
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-devoc:
+      namespace:
+        active: cloudhealth
+        lockFavorites: false
+        favorites:
+        - cloudhealth
+        - default
+      view:
+        active: pod
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-oc:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - default
+      view:
+        active: ingress
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-preprod:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - default
+      view:
+        active: po
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-prod:
+      namespace:
+        active: eck-lng
+        lockFavorites: false
+        favorites:
+        - eck-lng
+        - cloudhealth
+        - all
+        - traq
+        - default
+      view:
+        active: netpol
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+    westeurope-staging:
+      namespace:
+        active: all
+        lockFavorites: false
+        favorites:
+        - default
+      view:
+        active: po
+      featureGates:
+        nodeShell: false
+      shellPod:
+        image: busybox:1.35.0
+        command: []
+        args: []
+        namespace: default
+        limits:
+          cpu: 100m
+          memory: 100Mi
+        labels: {}
+      portForwardAddress: localhost
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 90
+      warn: 70
+  screenDumpDir: /var/folders/x8/vyymm8zs6_g74h4py4sb_jj80000gr/T/k9s-screens-yuvaraj.selvarajan
