@@ -126,7 +126,20 @@ require("neo-tree").setup({
       ["l"] = "open",
       ["h"] = "close_node",
       ["<space>"] = "",
-      -- Add other mappings if needed
+      -- copies the filename without extension
+      ["C"] = function(state)
+        local node = state.tree:get_node()
+        local filename = vim.fn.fnamemodify(node.name, ":r")
+        vim.fn.setreg("+", filename)
+        vim.notify("Copied filename: " .. filename)
+      end,
+      -- copies the relative path of the file
+      ["P"] = function(state)
+        local node = state.tree:get_node()
+        local relative_path = vim.fn.fnamemodify(node.path, ":.")
+        vim.fn.setreg("+", relative_path)
+        vim.notify("Copied relative path: " .. relative_path)
+      end,
     },
   },
   event_handlers = {
