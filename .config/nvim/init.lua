@@ -88,6 +88,7 @@ local bubbles_theme = {
   },
 }
 
+-- lualine configuration
 require("lualine").setup({
   options = {
     theme = bubbles_theme,
@@ -116,4 +117,16 @@ require("lualine").setup({
   },
   tabline = {},
   extensions = {},
+})
+
+-- Neo tree configuration
+require("neo-tree").setup({
+  event_handlers = {
+    {
+      event = "neo_tree_buffer_enter",
+      handler = function()
+        vim.opt.relativenumber = true
+      end,
+    },
+  },
 })
