@@ -121,6 +121,14 @@ require("lualine").setup({
 
 -- Neo tree configuration
 require("neo-tree").setup({
+  window = {
+    mappings = {
+      ["l"] = "open",
+      ["h"] = "close_node",
+      ["<space>"] = "",
+      -- Add other mappings if needed
+    },
+  },
   event_handlers = {
     {
       event = "neo_tree_buffer_enter",
