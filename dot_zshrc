@@ -148,3 +148,4 @@ alias config='/usr/bin/git --git-dir=/Users/yuvaraj.selvarajan/.cfg/ --work-tree
 BAT_THEME="Catppuccin Mocha"
 alias cd="z"
 alias cz=chezmoi
+CONFIG_DIR="$HOME/.config/lazygit"
