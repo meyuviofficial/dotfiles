@@ -148,6 +148,3 @@ BAT_THEME="Catppuccin Mocha"
 alias cd="z"
 alias cz=chezmoi
 CONFIG_DIR="$HOME/.config/lazygit"
-
-# zsh-syntax-highlighting config
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
