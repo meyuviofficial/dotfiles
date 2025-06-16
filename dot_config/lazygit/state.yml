@@ -1,0 +1,22 @@
+lastupdatecheck: 0
+recentrepos:
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos
+    - /Users/ys/Documents/Code/gwre-pdo/CCS-atmos-oam-library
+    - /Users/ys/Documents/Code/gwre-pdo/CCS-atmos-mage-helpers
+startuppopupversion: 5
+lastversion: 0.51.1
+customcommandshistory:
+    - qa
+    - git push --force
+    - 'git push '
+    - git pull origin main --rebase
+    - git pull origin main
+    - git stash pop
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
