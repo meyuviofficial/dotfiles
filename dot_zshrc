@@ -1,0 +1,101 @@
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.config/.oh-my-zsh"
+
+plugins=(aws kubectx terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
+
+source $ZSH/oh-my-zsh.sh
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# set path
+PATH=$PATH:/opt/homebrew/bin
+
+# GO config 
+export PATH=~/go/bin/:$PATH
+export GOPATH=~/gopath/
+
+# zoxide config 
+eval "$(zoxide init zsh)"
+
+# zoxide aliases
+alias cd="z"
+# eza aliases
+alias ls='eza'
+alias ll='eza -l'                 # long format
+alias la='eza -la'                # long + all files
+alias lt='eza -T'                 # tree view
+alias lT='eza -lT --level=2'      # tree view with long format and depth
+alias lg='eza -l --git'           # long format with git status
+
+
+# git pair
+export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
+
+# FZF - Catppuccin theme
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/ys/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# lazygit conifg 
+export CONFIG_DIR="$HOME/.config/lazygit"
+
+# Custom Functions
+# yazi config
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# atmos wrapper
+function set_scratch() {
+  if [[ -z "$1" ]]; then
+    echo "[❌] Usage: set_scratch <env-name-suffix>"
+    return 1
+  fi
+
+  local scratch_name="scratch-$1"
+  echo "[🔧] Switching to scratch environment: $scratch_name ..."
+
+  local exports
+  exports=$(atmos use -e "$scratch_name" | grep '^export ') || {
+    echo "[❌] Failed to generate export statements from 'atmos use'."
+    return 1
+  }
+
+  eval "$exports"
+  if [[ $? -ne 0 ]]; then
+    echo "[❌] Failed to apply environment variables for '$scratch_name'."
+    return 1
+  fi
+
+  echo "[✅] Scratch environment '$scratch_name' is now active."
+}
+
+# asdf config
+export ASDF_DATA_DIR="$HOME/.config/.asdf"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# starship
+eval "$(starship init zsh)"
