@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/.oh-my-zsh"
 
-plugins=(aws kubectx terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
+plugins=(terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -19,11 +19,15 @@ PATH=$PATH:/opt/homebrew/bin
 export PATH=~/go/bin/:$PATH
 export GOPATH=~/gopath/
 
+# BAT Theme
+export BAT_THEME="Catppuccin Mocha"
+
 # zoxide config 
 eval "$(zoxide init zsh)"
 
 # zoxide aliases
 alias cd="z"
+
 # eza aliases
 alias ls='eza'
 alias ll='eza -l'                 # long format
@@ -32,6 +36,8 @@ alias lt='eza -T'                 # tree view
 alias lT='eza -lT --level=2'      # tree view with long format and depth
 alias lg='eza -l --git'           # long format with git status
 
+# bat aliases
+alias cat='bat -p --paging=never'
 
 # git pair
 export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
@@ -93,9 +99,20 @@ function set_scratch() {
   echo "[✅] Scratch environment '$scratch_name' is now active."
 }
 
+function crossplane_reset_auth() {
+  kubectl delete secret -n crossplane-system crossplane-tls-client crossplane-tls-server
+  kubectl create secret generic crossplane-tls-client --namespace=crossplane-system --type=Opaque
+  kubectl create secret generic crossplane-tls-server --namespace=crossplane-system --type=Opaque
+  kubectl delete pods -n crossplane-system -l app=crossplane
+}
+
 # asdf config
 export ASDF_DATA_DIR="$HOME/.config/.asdf"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
+# atuin config
+eval "$(atuin init zsh)"
+
 # starship
 eval "$(starship init zsh)"
+
