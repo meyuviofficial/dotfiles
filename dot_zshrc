@@ -56,55 +56,17 @@ export PATH="/Users/ys/.rd/bin:$PATH"
 
 export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
 
+# Load custom functions from ~/.zsh/functions
+for func_file in ~/.zsh/functions/*.zsh; do
+  source "$func_file"
+done
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # lazygit conifg 
 export CONFIG_DIR="$HOME/.config/lazygit"
-
-# Custom Functions
-# yazi config
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
-
-# atmos wrapper
-function set_scratch() {
-  if [[ -z "$1" ]]; then
-    echo "[❌] Usage: set_scratch <env-name-suffix>"
-    return 1
-  fi
-
-  local scratch_name="scratch-$1"
-  echo "[🔧] Switching to scratch environment: $scratch_name ..."
-
-  local exports
-  exports=$(atmos use -e "$scratch_name" | grep '^export ') || {
-    echo "[❌] Failed to generate export statements from 'atmos use'."
-    return 1
-  }
-
-  eval "$exports"
-  if [[ $? -ne 0 ]]; then
-    echo "[❌] Failed to apply environment variables for '$scratch_name'."
-    return 1
-  fi
-
-  echo "[✅] Scratch environment '$scratch_name' is now active."
-}
-
-function crossplane_reset_auth() {
-  kubectl delete secret -n crossplane-system crossplane-tls-client crossplane-tls-server
-  kubectl create secret generic crossplane-tls-client --namespace=crossplane-system --type=Opaque
-  kubectl create secret generic crossplane-tls-server --namespace=crossplane-system --type=Opaque
-  kubectl delete pods -n crossplane-system -l app=crossplane
-}
 
 # asdf config
 export ASDF_DATA_DIR="$HOME/.config/.asdf"
