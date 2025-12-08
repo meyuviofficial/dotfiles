@@ -1,0 +1,22 @@
+# Appearance
+theme = Catppuccin Mocha
+background-opacity = 0.8
+background-blur = true
+macos-titlebar-style = hidden
+
+# padding
+window-padding-x = 10
+window-padding-y = 10
+
+# Cursor
+cursor-style = underline
+cursor-style-blink = true
+shell-integration-features = no-cursor
+
+#macos setting
+macos-option-as-alt = true
+macos-icon = glass
+
+# font
+font-family = JetBrains Mono Regular NL
+font-size = 16
