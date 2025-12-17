@@ -17,7 +17,7 @@ PATH=$PATH:/opt/homebrew/bin
 
 # GO config 
 export PATH=~/go/bin/:$PATH
-export GOPATH=~/gopath/
+export GOPATH=~/go/
 
 # BAT Theme
 export BAT_THEME="Catppuccin Mocha"
@@ -39,9 +39,6 @@ alias lg='eza -l --git'           # long format with git status
 # bat aliases
 alias cat='bat -p --paging=never'
 
-# git pair
-export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
-
 # FZF - Catppuccin theme
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
@@ -50,27 +47,23 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#45475a \
 --multi"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/ys/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+# Yazi config
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
 
 export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
-
-# Load custom functions from ~/.zsh/functions
-for func_file in ~/.zsh/functions/*.zsh; do
-  source "$func_file"
-done
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # lazygit conifg 
 export CONFIG_DIR="$HOME/.config/lazygit"
 
-# asdf config
-export ASDF_DATA_DIR="$HOME/.config/.asdf"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# tmux config
+export LANG=en_US.UTF-8 
+export LC_ALL=en_US.UTF-8
 
 # atuin config
 eval "$(atuin init zsh)"
