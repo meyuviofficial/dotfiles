@@ -1,0 +1,23 @@
+[window]
+decorations = "None"
+dynamic_padding = true
+padding = { x = 10, y = 10 }
+
+[font]
+normal = { family = "JetBrains Mono", style = "Regular" }
+size = 14
+
+[env]
+TERM = "xterm-256color"
+COLORTERM = "truecolor"
+
+[general]
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = { shape = "Underline", blinking = "On" }
