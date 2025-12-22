@@ -1,11 +1,21 @@
 lastupdatecheck: 0
 recentrepos:
-    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos-crossplane-packages
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos-efs-backup-restore
     - /Users/ys/Documents/Code/gwre-pdo/CCS-atmos-oam-library
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-ajanta-utilities
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-ajanta-sandbox
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos-efs-csi-driver
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos
+    - /Users/ys/Documents/Code/gwre-pdo/ccs-atmos-tests
+    - /Users/ys/.local/share/chezmoi
     - /Users/ys/Documents/Code/gwre-pdo/CCS-atmos-mage-helpers
 startuppopupversion: 5
-lastversion: 0.51.1
+didshowhunkstaginghint: false
+lastversion: 0.56.0
 customcommandshistory:
+    - 'git duet-commit -m "feat: add unit tests for on_demand_backup flow"'
+    - 'fix: removed the focus mode'
     - qa
     - git push --force
     - 'git push '
@@ -13,10 +23,3 @@ customcommandshistory:
     - git pull origin main
     - git stash pop
 hidecommandlog: false
-ignorewhitespaceindiffview: false
-diffcontextsize: 3
-renamesimilaritythreshold: 50
-localbranchsortorder: recency
-remotebranchsortorder: alphabetical
-gitlogorder: topo-order
-gitlogshowgraph: always
