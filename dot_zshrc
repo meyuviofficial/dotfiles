@@ -1,7 +1,18 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.config/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+autoload -U compinit && compinit
+source $ZSH/oh-my-zsh.sh
+plugins=(git terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,19 +36,8 @@ export BAT_THEME="Catppuccin Mocha"
 # zoxide config 
 eval "$(zoxide init zsh)"
 
-# zoxide aliases
-alias cd="z"
-
-# eza aliases
-alias ls='eza'
-alias ll='eza -l'                 # long format
-alias la='eza -la'                # long + all files
-alias lt='eza -T'                 # tree view
-alias lT='eza -lT --level=2'      # tree view with long format and depth
-alias lg='eza -l --git'           # long format with git status
-
-# bat aliases
-alias cat='bat -p --paging=never'
+# git pair
+export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
 
 # FZF - Catppuccin theme
 export FZF_DEFAULT_OPTS=" \
@@ -46,6 +46,18 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
 --multi"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/ys/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
+
+# lazygit conifg 
+export CONFIG_DIR="$HOME/.config/lazygit"
+
+# atuin config
+eval "$(atuin init zsh)"
 
 # Yazi config
 function y() {
@@ -56,18 +68,14 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
+# Homebrew Cask Apps install dir
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 
-# lazygit conifg 
-export CONFIG_DIR="$HOME/.config/lazygit"
+# direnv config
+# eval "$(direnv hook zsh)"  # for zsh
 
-# tmux config
-export LANG=en_US.UTF-8 
-export LC_ALL=en_US.UTF-8
+# Added by Antigravity
+export PATH="/Users/ys/.antigravity/antigravity/bin:$PATH"
 
-# atuin config
-eval "$(atuin init zsh)"
-
-# starship
-eval "$(starship init zsh)"
-
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
