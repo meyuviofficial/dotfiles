@@ -1,81 +1,92 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# ------------------------------
+# 
+# Shell options
+# ------------------------------
+setopt no_beep
+setopt auto_cd
+setopt interactive_comments
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.config/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ------------------------------
+# PATH
+# ------------------------------
+typeset -U path PATH
+path=(
+  /opt/homebrew/bin
+  /usr/local/bin
+  $HOME/go/bin
+  $HOME/.rd/bin
+  $HOME/.antigravity/antigravity/bin
+  $path
+)
+export PATH
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-autoload -U compinit && compinit
-source $ZSH/oh-my-zsh.sh
-plugins=(git terraform zsh-autosuggestions zsh-syntax-highlighting kubectl)
-
-source $ZSH/oh-my-zsh.sh
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
-# set path
-PATH=$PATH:/opt/homebrew/bin
-
-# GO config 
-export PATH=~/go/bin/:$PATH
-export GOPATH=~/go/
-
-# BAT Theme
+# ------------------------------
+# Environment
+# ------------------------------
+export GOPATH="$HOME/go"
 export BAT_THEME="Catppuccin Mocha"
+export GIT_DUET_AUTHORS_FILE="$HOME/.config/.git-authors"
+export CONFIG_DIR="$HOME/.config/lazygit"
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 
-# zoxide config 
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR=vim
+else
+  export EDITOR=nvim
+fi
+
+alias k=kubectl
+
+# ------------------------------
+# Completion (ONCE)
+# ------------------------------
+autoload -Uz compinit
+compinit -C
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# ------------------------------
+# zoxide (correct, supported)
+# ------------------------------
 eval "$(zoxide init zsh)"
 
-# git pair
-export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
+# ------------------------------
+# starship
+# ------------------------------
+eval "$(starship init zsh)"
 
-# FZF - Catppuccin theme
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
---color=selected-bg:#45475a \
---multi"
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/ys/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
-export PATH="$PATH:/usr/local/bin:$HOME/go/bin/"
-
-# lazygit conifg 
-export CONFIG_DIR="$HOME/.config/lazygit"
-
-# atuin config
+# ------------------------------
+# Atuin (correct, supported)
+# ------------------------------
 eval "$(atuin init zsh)"
 
-# Yazi config
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+# ------------------------------
+# yazi
+# ------------------------------
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [[ -n "$cwd" && "$cwd" != "$PWD" ]] && builtin cd -- "$cwd"
+  rm -f -- "$tmp"
 }
 
-# Homebrew Cask Apps install dir
-export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
+# ------------------------------
+# Autosuggestions (lightweight)
+# ------------------------------
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# direnv config
-# eval "$(direnv hook zsh)"  # for zsh
+# ------------------------------
+# Syntax highlighting (MUST be last)
+# ------------------------------
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Added by Antigravity
-export PATH="/Users/ys/.antigravity/antigravity/bin:$PATH"
+# ------------------------------
+# # 6. Optional profiling (off by default)
+# # ------------------------------
+# # zmodload zsh/zprof
+# # zprof
+#
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
