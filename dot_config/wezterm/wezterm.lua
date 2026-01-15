@@ -17,7 +17,12 @@ config.window_background_opacity = 0.8
 config.macos_window_background_blur = 50
 config.text_background_opacity = 1.0
 config.color_scheme = "Catppuccin Mocha"
-config.default_prog = { "/bin/zsh" }
+config.default_prog = { "/bin/zsh", "-l" }
+
+-- Option key as Alt for tmux navigation
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
 -- and finally, return the configuration to wezterm
 
 return config
