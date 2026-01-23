@@ -27,6 +27,7 @@ keybinds clear-defaults=true {
         bind "j" "Down" { MoveFocus "Down"; }
         bind "k" "Up" { MoveFocus "Up"; }
         bind "p" { SwitchFocus; }
+        bind "n" { NewPane; SwitchToMode "Normal"; }
         bind "|" { NewPane; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "r" { NewPane "Right"; SwitchToMode "Normal"; }
@@ -39,13 +40,15 @@ keybinds clear-defaults=true {
         bind "i" { TogglePanePinned; SwitchToMode "Normal"; }
     }
     move {
-        bind "Alt m" { SwitchToMode "Normal"; }
+        bind "Alt w" { SwitchToMode "Normal"; }
         bind "n" "Tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "h" "Left" { MovePane "Left"; }
         bind "j" "Down" { MovePane "Down"; }
         bind "k" "Up" { MovePane "Up"; }
         bind "l" "Right" { MovePane "Right"; }
+        bind "i" { MovePane "Left"; }
+        bind "o" { MovePane "Right"; }
     }
     tab {
         bind "Alt t" { SwitchToMode "Normal"; }
@@ -109,7 +112,7 @@ keybinds clear-defaults=true {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
     }
     session {
-        bind "Ctrl o" { SwitchToMode "Normal"; }
+        bind "Alt a" { SwitchToMode "Normal"; }
         bind "Alt s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
         bind "w" {
@@ -166,11 +169,12 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "Locked"; }
-        bind "Ctrl q" { Quit; }
+        bind "Alt q" { Quit; }
+        bind "Alt d" { Detach; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt n" { NewPane; }
-        bind "Alt i" { MoveTab "Left"; }
-        bind "Alt o" { MoveTab "Right"; }
+        bind "Alt H" { MoveTab "Left"; }
+        bind "Alt L" { MoveTab "Right"; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
@@ -202,13 +206,13 @@ keybinds clear-defaults=true {
         bind "Alt s" { SwitchToMode "Scroll"; }
     }
     shared_except "session" "locked" {
-        bind "Ctrl o" { SwitchToMode "Session"; }
+        bind "Alt a" { SwitchToMode "Session"; }
     }
     shared_except "tab" "locked" {
         bind "Alt t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
-        bind "Alt m" { SwitchToMode "Move"; }
+        bind "Alt w" { SwitchToMode "Move"; }
     }
     shared_except "tmux" "locked" {
         bind "Ctrl b" { SwitchToMode "Tmux"; }
