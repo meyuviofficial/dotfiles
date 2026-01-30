@@ -23,9 +23,17 @@ path=(
   $HOME/go/bin
   $HOME/.rd/bin
   $HOME/.antigravity/antigravity/bin
+  $HOME/.local/share/mise/shims
   $path
 )
 export PATH
+
+# carapace - COMMENTED OUT FOR SPEED (redundant with Oh My Zsh)
+# autoload -U compinit && compinit
+# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
+# source <(carapace _carapace)
 
 # ------------------------------
 # Environment
@@ -39,11 +47,9 @@ export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
 alias k=kubectl
 
 # ------------------------------
-# Completion (ONCE)
+# Completion (ONCE) - SIMPLIFIED FOR SPEED
 # ------------------------------
-autoload -Uz compinit
-compinit -C
-
+# Removed duplicate compinit - Oh My Zsh handles this
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
@@ -119,7 +125,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectx kubectl zoxide fzf eza zsh-autosuggestions zsh-syntax-highlighting)
+# Reduced plugins for speed - enabled fzf for productivity
+plugins=(git kubectl zoxide fzf)
+# Heavy plugins commented out for speed:
+# kubectx eza zsh-autosuggestions zsh-syntax-highlighting
 
 source $ZSH/oh-my-zsh.sh
 
@@ -184,3 +193,27 @@ export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Enable k8s context in p10k (add this to ~/.p10k.zsh if not already there)
+# In ~/.p10k.zsh, find POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS and add 'kubecontext'
+
+# Catppuccin Mocha theme for Powerlevel10k
+# Add these to ~/.p10k.zsh for Catppuccin colors:
+# typeset -g POWERLEVEL9K_BACKGROUND='#1e1e2e'
+# typeset -g POWERLEVEL9K_FOREGROUND='#cdd6f4' 
+# And customize individual segment colors with Catppuccin palette
+
+# broot config
+source /Users/ys/.config/broot/launcher/bash/br
+
+# mise - LAZY LOAD FOR SPEED
+# eval "$(mise activate zsh)"
+# Lazy load mise only when needed
+
+# atuin config - COMMENTED OUT FOR SPEED
+# eval "$(atuin init zsh --disable-ctrl-r)"
+# Uncomment if you need atuin, but it slows startup
+
+# starship config - COMMENTED OUT (conflicts with p10k and slows startup)
+# eval "$(starship init zsh)"
+# You already have Powerlevel10k, starship is redundant
