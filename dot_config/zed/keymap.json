@@ -1,0 +1,103 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      // Go to definition
+      // Search the keymap for “definition” and bind to the action for “Go to Definition”
+      "ctrl-shift-d": "editor::GoToDefinition",
+
+      // Disable F12 default “Go to Definition”
+      "f12": null,
+
+      // Navigate focus (pane or split) left/right/up/down
+      // Search for “focus left/right/up/down” or “activate pane left/right” or “move focus”
+      "alt-h": "workspace::ActivatePaneLeft",
+      "alt-l": "workspace::ActivatePaneRight",
+      "alt-k": "workspace::ActivatePaneUp",
+      "alt-j": "workspace::ActivatePaneDown",
+
+      // Split editor
+      // Search for “split editor” or “split right/down”
+      "alt-\\": "pane::SplitRight",
+      "alt--": "pane::SplitDown",
+
+      // Navigate tabs (next/previous item in current pane)
+      // Search for “next tab” / “previous tab” or “activate next item”
+      "alt-shift-l": "pane::ActivateNextItem",
+      "alt-shift-h": "pane::ActivatePreviousItem",
+
+      // Focus terminal
+      // Search for “terminal focus” or “toggle terminal panel”
+      "alt-t": "terminal_panel::Toggle",
+
+      // Focus back to editor from terminal
+      // Search for “focus active editor” or “focus editor”
+      "alt-e": "editor::ToggleFocus",
+
+      // Toggle sidebar (left dock / project panel)
+      // Search for “toggle left dock” or “toggle project panel”
+      "alt-b": "workspace::ToggleLeftDock",
+
+      // Toggle panel (bottom dock / terminal area)
+      // Search for “toggle bottom dock” or “toggle panel”
+      "alt-p": "workspace::ToggleBottomDock",
+
+      // Quick open file
+      // Zed uses file finder—action is commonly named file_finder::Toggle
+      "alt-o": "file_finder::Toggle",
+
+      // Go to specific tab by number within current pane
+      // Search for “activate item index” or see default keymaps for numbered activation
+      "alt-1": ["pane::ActivateItem", 0],
+      "alt-2": ["pane::ActivateItem", 1],
+      "alt-3": ["pane::ActivateItem", 2],
+      "alt-4": ["pane::ActivateItem", 3],
+      "alt-5": ["pane::ActivateItem", 4],
+      "alt-6": ["pane::ActivateItem", 5],
+      "alt-7": ["pane::ActivateItem", 6],
+      "alt-8": ["pane::ActivateItem", 7],
+      "alt-9": ["pane::ActivateItem", 8],
+
+      // Editor history navigation
+      // Search for “navigate back/forward” or “history back/forward”
+      "alt-[": "pane::GoBack",
+      "alt-]": "pane::GoForward",
+
+      // Focus file explorer (project panel)
+      // Search for “open project panel” or “focus project panel”
+      "alt-shift-e": "project_panel::ToggleFocus",
+
+      // Close all / close other tabs
+      // Search for “close all items” and “close other items”
+      "alt-shift-w": "pane::CloseAllItems",
+      "alt-cmd-w": "pane::CloseOtherItems",
+
+      // Reopen closed tab
+      // Search for “reopen closed item” or “restore closed buffer”
+      "alt-shift-t": "pane::ReopenClosedItem",
+    },
+  },
+  {
+    "context": "ProjectPanel && project_panel_focused",
+    "bindings": {
+      // Focus filter/search input in the project panel
+      // Use the one that exists in your Zed build:
+      // "alt-f": "project_panel::FocusSearch"
+      "l": "project_panel::UnfoldDirectory",
+      "h": "project_panel::FoldDirectory",
+    },
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      // "jk": "vim::SwitchToNormalMode",
+    },
+  },
+]
