@@ -9,10 +9,6 @@
   {
     "context": "Workspace",
     "bindings": {
-      // Go to definition
-      // Search the keymap for “definition” and bind to the action for “Go to Definition”
-      "ctrl-shift-d": "editor::GoToDefinition",
-
       // Disable F12 default “Go to Definition”
       "f12": null,
 
@@ -33,25 +29,21 @@
       "alt-shift-l": "pane::ActivateNextItem",
       "alt-shift-h": "pane::ActivatePreviousItem",
 
-      // Focus terminal
-      // Search for “terminal focus” or “toggle terminal panel”
-      "alt-t": "terminal_panel::Toggle",
-
       // Focus back to editor from terminal
       // Search for “focus active editor” or “focus editor”
       "alt-e": "editor::ToggleFocus",
 
-      // Toggle sidebar (left dock / project panel)
-      // Search for “toggle left dock” or “toggle project panel”
-      "alt-b": "workspace::ToggleLeftDock",
+      // Focus file explorer (project panel)
+      // Search for “open project panel” or “focus project panel”
+      "alt-shift-e": "project_panel::ToggleFocus",
 
       // Toggle panel (bottom dock / terminal area)
       // Search for “toggle bottom dock” or “toggle panel”
       "alt-p": "workspace::ToggleBottomDock",
 
-      // Quick open file
-      // Zed uses file finder—action is commonly named file_finder::Toggle
-      "alt-o": "file_finder::Toggle",
+      // Focus terminal
+      // Search for “terminal focus” or “toggle terminal panel”
+      "alt-t": "terminal_panel::Toggle",
 
       // Go to specific tab by number within current pane
       // Search for “activate item index” or see default keymaps for numbered activation
@@ -70,18 +62,10 @@
       "alt-[": "pane::GoBack",
       "alt-]": "pane::GoForward",
 
-      // Focus file explorer (project panel)
-      // Search for “open project panel” or “focus project panel”
-      "alt-shift-e": "project_panel::ToggleFocus",
-
       // Close all / close other tabs
       // Search for “close all items” and “close other items”
       "alt-shift-w": "pane::CloseAllItems",
       "alt-cmd-w": "pane::CloseOtherItems",
-
-      // Reopen closed tab
-      // Search for “reopen closed item” or “restore closed buffer”
-      "alt-shift-t": "pane::ReopenClosedItem",
     },
   },
   {
@@ -100,4 +84,22 @@
       // "jk": "vim::SwitchToNormalMode",
     },
   },
+  {
+    "context": "(Editor && mode == full)",
+    "bindings": {
+      "cmd-g": "go_to_line::Toggle",
+    },
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "alt-v": "terminal::ToggleViMode",
+    },
+  },
+  {
+    "context": "AgentPanel",
+    "bindings": {
+      "ctrl-t": "agent::ToggleProfileSelector"
+    }
+  }
 ]
