@@ -12,6 +12,7 @@ fi
 setopt no_beep
 setopt auto_cd
 setopt interactive_comments
+setopt NO_BANG_HIST
 
 # ------------------------------
 # PATH
@@ -24,16 +25,12 @@ path=(
   $HOME/.rd/bin
   $HOME/.antigravity/antigravity/bin
   $HOME/.local/share/mise/shims
+  $HOME/.cargo/bin
+  $HOME/.local/bin
+  ${KREW_ROOT:-$HOME/.krew}/bin
   $path
 )
 export PATH
-
-# carapace - COMMENTED OUT FOR SPEED (redundant with Oh My Zsh)
-# autoload -U compinit && compinit
-# export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
-# zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
-# zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
-# source <(carapace _carapace)
 
 # ------------------------------
 # Environment
@@ -127,8 +124,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 # Reduced plugins for speed - enabled fzf for productivity
 plugins=(git kubectl zoxide fzf)
-# Heavy plugins commented out for speed:
-# kubectx eza zsh-autosuggestions zsh-syntax-highlighting
 
 source $ZSH/oh-my-zsh.sh
 
@@ -170,10 +165,6 @@ function y() {
         rm -f -- "$tmp"
 }
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/ys/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 # BAT THEME
 export BAT_THEME="Catppuccin Mocha"
 
@@ -203,17 +194,13 @@ export GIT_DUET_AUTHORS_FILE=$HOME/.config/.git-authors
 # typeset -g POWERLEVEL9K_FOREGROUND='#cdd6f4' 
 # And customize individual segment colors with Catppuccin palette
 
+
 # broot config
 source /Users/ys/.config/broot/launcher/bash/br
 
-# mise - LAZY LOAD FOR SPEED
-# eval "$(mise activate zsh)"
-# Lazy load mise only when needed
+# tv config
+# eval "$(tv init zsh)"
 
-# atuin config - COMMENTED OUT FOR SPEED
-# eval "$(atuin init zsh --disable-ctrl-r)"
-# Uncomment if you need atuin, but it slows startup
-
-# starship config - COMMENTED OUT (conflicts with p10k and slows startup)
-# eval "$(starship init zsh)"
-# You already have Powerlevel10k, starship is redundant
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/ys/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
