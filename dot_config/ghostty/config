@@ -17,7 +17,9 @@ shell-integration-features = no-cursor
 font-family = JetBrains Mono Regular NL
 font-size = 14
 
+# macos
+macos-option-as-alt = true
 
 # shell
-shell-integration = zsh
+shell-integration = fish
 command = /opt/homebrew/bin/fish --interactive --login

@@ -14,12 +14,19 @@ if status is-interactive
 
 # Append path variable
   fish_add_path --append $HOME/go/bin
-
+  fish_add_path --append /opt/homebrew/bin
+  
 # zoxide config
   zoxide init fish | source
 
 # Initialize Starship prompt
   starship init fish | source
+
+# Universal variables
+  set -Ux XDG_CONFIG_HOME "$HOME/.config"
+
+# Global variables
+  set -gx NODE_EXTRA_CA_CERTS ~/.config/certs/zscaler.pem
 end
 
 
