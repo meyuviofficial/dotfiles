@@ -166,15 +166,15 @@ keybinds clear-defaults=true {
         bind "Alt o" { MoveTab "right"; }
     }
     shared_except "locked" {
-        bind "Alt s" { 
+        bind "Alt z" { 
             // Note: you must use the absolute path to the plugin file
             LaunchOrFocusPlugin "file:/Users/ys/.config/zellij/plugins/zsm.wasm" {
                 floating true
                 move_to_focused_tab true
                 default_layout "classic"
                 show_resurrectable_sessions true
-                base_paths "/Users/ys/Documents/Code/gwre-pdo/"
-                session_separator "/"
+                base_paths "/Users/ys/Documents/Code/gwre-pdo"
+                session_separator "."
             }
         }
         bind "Alt p" { TogglePaneInGroup; }
