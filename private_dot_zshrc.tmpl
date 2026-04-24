@@ -1,0 +1,80 @@
+{{- /* Managed by chezmoi — edit the template, run `chezmoi apply`. */ -}}
+
+# ── Shell options ─────────────────────────────────────────────
+setopt no_beep auto_cd interactive_comments NO_BANG_HIST
+
+# ── PATH ──────────────────────────────────────────────────────
+typeset -U path PATH
+path=(
+{{- if eq .chezmoi.os "darwin" }}
+  /opt/homebrew/bin
+{{- end }}
+  /usr/local/bin
+  $HOME/go/bin
+  $HOME/.rd/bin
+  $HOME/.antigravity/antigravity/bin
+  $HOME/.local/share/mise/shims
+  $HOME/.cargo/bin
+  $HOME/.local/bin
+  ${KREW_ROOT:-$HOME/.krew}/bin
+  $path
+)
+export PATH
+
+# ── Environment ───────────────────────────────────────────────
+export GOPATH="$HOME/go"
+export BAT_THEME="Catppuccin Mocha"
+export GIT_DUET_AUTHORS_FILE="$HOME/.config/.git-authors"
+export CONFIG_DIR="$HOME/.config/lazygit"
+{{- if eq .chezmoi.os "darwin" }}
+export HOMEBREW_CASK_OPTS="--appdir=$HOME/Applications"
+{{- end }}
+
+# Editor — vim on SSH, nvim locally
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# ── Aliases ───────────────────────────────────────────────────
+alias k=kubectl
+
+# ── Completions ───────────────────────────────────────────────
+# OMZ used to run compinit; now manual. -C skips security audit for speed.
+autoload -Uz compinit && compinit -C
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' menu select
+
+# ── Yazi launcher ─────────────────────────────────────────────
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
+
+# ── FZF Catppuccin Mocha ──────────────────────────────────────
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--multi"
+
+# ── Tool init ─────────────────────────────────────────────────
+command -v starship >/dev/null && eval "$(starship init zsh)"
+command -v zoxide   >/dev/null && eval "$(zoxide init zsh)"
+command -v atuin    >/dev/null && eval "$(atuin init zsh --disable-ctrl-r)"
+command -v fzf      >/dev/null && source <(fzf --zsh)
+
+# ── broot (guard in case not installed) ───────────────────────
+[[ -f "$HOME/.config/broot/launcher/bash/br" ]] && source "$HOME/.config/broot/launcher/bash/br"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="{{ .chezmoi.homeDir }}/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
