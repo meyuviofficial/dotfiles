@@ -1,0 +1,57 @@
+{{- /* Managed by chezmoi. Edit the template, run `chezmoi apply`. */ -}}
+
+if status is-login
+    # ─── PATH ──────────────────────────────────────────────────────
+    fish_add_path {{ .chezmoi.homeDir }}/.local/bin {{ .chezmoi.homeDir }}/go/bin
+    {{- if eq .chezmoi.os "darwin" }}
+    fish_add_path /opt/homebrew/bin
+    fish_add_path --append '/Applications/Visual Studio Code.app/Contents/Resources/app/bin'
+    fish_add_path --append "{{ .chezmoi.homeDir }}/Library/Application Support/JetBrains/Toolbox/scripts"
+	
+    {{- end }}
+
+    # ─── Common exports ────────────────────────────────────────────
+    set -gx XDG_CONFIG_HOME $HOME/.config
+    set -gx ZELLIJ_SOCKET_DIR /tmp/zellij
+    set -gx GIT_DUET_AUTHORS_FILE $HOME/.config/.git-authors
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+    {{- if eq .chezmoi.os "darwin" }}
+    set -gx HOMEBREW_CASK_OPTS "--appdir=~/Applications"
+    set -gx GH_TOKEN {{ keyring "github-token" "ys" }}
+    set -gx TEAMCITY_TOKEN  {{ keyring "teamcity-token" "ys" }}
+    set -gx JFROG_ACCESS_TOKEN {{ keyring "artifactory-token" "ys" }}
+    {{- end }}
+
+    {{- if eq .profile "work" }}
+    # ─── Work-only ─────────────────────────────────────────────────
+    set -gx NODE_EXTRA_CA_CERTS $HOME/.config/certs/zscaler.pem
+    set -gx GOPRIVATE github.com/gwre-pdo,github.com/guidewire
+    set -gx GONOSUMDB github.com/gwre-pdo,github.com/guidewire
+    set -gx TEAMCITY_URL https://gwre-devexp-ci-production-devci.gwre-devops.net/
+    {{- end }}
+end
+
+if status is-interactive
+    # ─── Key bindings ──────────────────────────────────────────────
+    fish_vi_key_bindings
+    bind -M insert alt-backspace backward-kill-word
+
+    # ─── Tool init ─────────────────────────────────────────────────
+    zoxide init fish | source
+    starship init fish | source    
+    # fzf --fish | source
+    atuin init --disable-ai fish | source
+
+    # ─── Greeting ──────────────────────────────────────────────────
+    set fish_greeting ""
+
+    {{- if eq .profile "work" }}
+    # ─── Work-only abbrs ───────────────────────────────────────────
+
+    {{- end }}
+end
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+set --export --prepend PATH "{{ .chezmoi.homeDir }}/.rd/bin"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
