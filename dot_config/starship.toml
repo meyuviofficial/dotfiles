@@ -12,6 +12,10 @@ $line_break\
 $python\
 $character"""
 
+right_format = """
+$kubernetes
+"""
+
 [character]
 success_symbol = '[➜](bold green) '
 error_symbol = '[✗](bold red) '
